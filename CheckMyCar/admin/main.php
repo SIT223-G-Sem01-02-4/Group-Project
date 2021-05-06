@@ -31,7 +31,7 @@ echo <<<EOT
             </a>
         </header>
         <aside class="responsive-width-100 responsive-hidden">
-            <a href="login.php"><i class="fas fa-users"></i>Accounts</a>
+            <a href="index.php"><i class="fas fa-users"></i>Accounts</a>
             <a href="emailtemplate.php"><i class="fas fa-envelope"></i>Email Template</a>
             <a href="settings.php"><i class="fas fa-tools"></i>Settings</a>
             <a href="../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
