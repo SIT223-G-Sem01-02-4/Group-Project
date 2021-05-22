@@ -24,12 +24,14 @@ $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td class="responsive-hidden">Email</td>
                     <td class="responsive-hidden">Activation Code</td>
                     <td class="responsive-hidden">Role</td>
+                    <td class="responsive-hidden">Make</td>
+                    <td class="responsive-hidden">Model</td>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($accounts)): ?>
                 <tr>
-                    <td colspan="8" style="text-align:center;">There are no accounts</td>
+                    <td colspan="8" style="text-align:center;">There are currently no accounts!</td>
                 </tr>
                 <?php else: ?>
                 <?php foreach ($accounts as $account): ?>
@@ -40,6 +42,8 @@ $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td class="responsive-hidden"><?=$account['email']?></td>
                     <td class="responsive-hidden"><?=$account['activation_code']?></td>
                     <td class="responsive-hidden"><?=$account['role']?></td>
+                    <td class="responsive-hidden"><?=$account['make']?></td>
+                    <td class="responsive-hidden"><?=$account['model']?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

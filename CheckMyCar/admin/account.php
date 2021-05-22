@@ -8,7 +8,9 @@ $account = array(
     'email' => '',
     'activation_code' => '',
     'rememberme' => '',
-    'role' => 'Member'
+    'role' => 'Member',
+    'make' => '',
+    'model' => ''
 );
 
 $roles = array('Member', 'Admin');
@@ -22,27 +24,27 @@ if (isset($_GET['id'])) {
     $page = 'Edit';
     if (isset($_POST['submit'])) {
         // Update the account
-        $stmt = $pdo->prepare('UPDATE accounts SET username = ?, password = ?, email = ?, activation_code = ?, rememberme = ?, role = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE accounts SET username = ?, password = ?, email = ?, activation_code = ?, rememberme = ?, role = ?, make = ?, model = ? WHERE id = ?');
         $password = $account['password'] != $_POST['password'] ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $account['password'];
-        $stmt->execute([ $_POST['username'], $password, $_POST['email'], $_POST['activation_code'], $_POST['rememberme'], $_POST['role'], $_GET['id'] ]);
-        header('Location: login.php');
+        $stmt->execute([ $_POST['username'], $password, $_POST['email'], $_POST['activation_code'], $_POST['rememberme'], $_POST['role'], $_POST['make'], $_POST['model'], $_GET['id'] ]);
+        header('Location: index.php');
         exit;
     }
     if (isset($_POST['delete'])) {
         // Delete the account
         $stmt = $pdo->prepare('DELETE FROM accounts WHERE id = ?');
         $stmt->execute([ $_GET['id'] ]);
-        header('Location: login.php');
+        header('Location: index.php');
         exit;
     }
 } else {
     // Create a new account
     $page = 'Create';
     if (isset($_POST['submit'])) {
-        $stmt = $pdo->prepare('INSERT IGNORE INTO accounts (username,password,email,activation_code,rememberme,role) VALUES (?,?,?,?,?,?)');
+        $stmt = $pdo->prepare('INSERT IGNORE INTO accounts (username,password,email,activation_code,rememberme,role,make,model) VALUES (?,?,?,?,?,?,?,?)');
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $stmt->execute([ $_POST['username'], $password, $_POST['email'], $_POST['activation_code'], $_POST['rememberme'], $_POST['role'] ]);
-        header('Location: login.php');
+        $stmt->execute([ $_POST['username'], $password, $_POST['email'], $_POST['activation_code'], $_POST['rememberme'], $_POST['role'], $_POST['make'], $_POST['model'] ]);
+        header('Location: index.php');
         exit;
     }
 }
@@ -70,6 +72,10 @@ if (isset($_GET['id'])) {
             <option value="<?=$role?>"<?=$role==$account['role']?' selected':''?>><?=$role?></option>
             <?php endforeach; ?>
         </select>
+        <label for="make">Make</label>
+        <input type="text" id="make" name="make" placeholder="Make" value="<?=$account['make']?>">
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model" placeholder="Model" value="<?=$account['model']?>">
         <div class="submit-btns">
             <input type="submit" name="submit" value="Submit">
             <?php if ($page == 'Edit'): ?>
