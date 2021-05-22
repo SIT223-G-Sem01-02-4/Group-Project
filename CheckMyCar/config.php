@@ -11,9 +11,9 @@ define('db_name', 'phplogin');
 define('db_charset', 'utf8');
 // Email activation variables
 // account activation required?
-define('account_activation', false);
-// Change "Your Company Name" and "yourdomain.com", do not remove the < and >
-define('mail_from', 'Your Company Name <noreply@yourdomain.com>');
+define('account_activation', true);
+// The Email address for activation/automated emails
+define('mail_from', 'CheckYourCar <sit223checkyourcar@gmail.com>');
 // Link to activation file, update this
-define('activation_link', 'http://yourdomain.com/phplogin/activate.php');
+define('activation_link', 'http://localhost/Group-Project/CheckMyCar/activate.php'); 
 ?>
