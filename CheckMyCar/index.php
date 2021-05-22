@@ -37,7 +37,7 @@
                     <div class="icon" onclick="location.href='#';" style="cursor: pointer;">
                         <img src="./images/CheckNowIcon.svg">
                         <div class="icon_info">
-                            <p class="icon_top">Curious about your familys safety?</p>
+                            <p class="icon_top">Are you Curious about your familys safety?</p>
                             <p class="icon_bottom">Check Now</p>
                         </div>
                     </div>
