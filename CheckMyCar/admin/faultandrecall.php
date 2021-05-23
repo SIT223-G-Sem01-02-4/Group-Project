@@ -9,7 +9,7 @@ $faultrecall = array(
     'description' => '',
 );
 
-// Array for enum values for db (anything added here will need to be reiterated in the table column)
+// Array for enum values for db (anything added here will need to be reiterated in the table column entry)
 $types = array('Fault','Recall');
 $makes = array('Audi','BMW','Ferrari','Ford','Holden','Holden','Lexus','Mazda','Tesla','Toyota','Volkswagon');
 

@@ -34,7 +34,7 @@ echo <<<EOT
             </a>
         </header>
         <aside class="responsive-width-100 responsive-hidden">
-            <a href="../home.php"><i class="fas fa-home"></i> Home</a>
+            <a href="../index.php"><i class="fas fa-home"></i> Home</a>
             <a href="index.php"><i class="fas fa-users"></i>Accounts</a>
             <a href="faultsandrecalls.php"><i class="fas fa-car"></i>Faults & Recalls</a>
             <a href="emailtemplate.php"><i class="fas fa-envelope"></i>Email Templates</a>

@@ -1,5 +1,5 @@
 <?php
-// Include the root "main.php" file and check if user is logged-in...
+// Include the root "main.php" file
 include 'main.php';
 
 // Read the configuration file

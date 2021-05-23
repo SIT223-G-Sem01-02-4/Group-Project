@@ -67,7 +67,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['cpassword'], $_POST['e
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
-		<title>Member Profile Page</title>
+		<title>Member Profile - CheckYourCar</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -75,25 +75,24 @@ if (isset($_POST['username'], $_POST['password'], $_POST['cpassword'], $_POST['e
 		<nav class="navtop">
 			<div>
 				<h1>CheckYourCar</h1>
-				<a href="home.php"><i class="fas fa-home"></i>Home</a>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
+				<a href="index.php"><i class="fas fa-home"></i>Home</a>
+				<a href="about-us.php"><i class="fas fa-users"></i> About Us</a>
+				<a href="contact-us.php"><i class="fas fa-envelope"></i> Contact Us</a>
 				<?php if ($_SESSION['role'] == 'Admin'): ?>
-				<a href="admin/index.php" target="_blank"><i class="fas fa-user-cog"></i>Admin</a>
+					<a href="admin/index.php" target="_blank"><i class="fas fa-user-cog"></i>Admin</a>
 				<?php endif; ?>
+				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
 		</nav>
 		<?php if (!isset($_GET['action'])): ?>
 		<div class="content profile">
-			<h2>Profile Page</h2>
+			<h2 class="hero_font">Welcome, <?=$_SESSION['name']?>!</h>
 			<div class="block">
-				<p><strong>Your account details are below:</strong></p>
+
 				<table>
 					<tr>
-						<td></td>
-					</tr>
-					<tr>
-						<td><strong>Personal Details:</strong></td>
+						<td><strong><u>Personal Details:</u></strong></td>
 					</tr>
 					<tr>
 						<td>Username:</td>
@@ -111,7 +110,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['cpassword'], $_POST['e
 						<td></td>
 					</tr>
 					<tr>
-						<td><strong>Vehicle Details:</strong></td>
+						<td><strong><u>Personal Vehicle Details:</u></strong></td>
 					</tr>
 					<tr>
 						<td>Make:</td>
