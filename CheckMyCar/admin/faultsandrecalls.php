@@ -1,11 +1,12 @@
 <?php
+// Include the root "main.php" file and prepare SQL statements.
 include 'main.php';
 $stmt = $pdo->prepare('SELECT * FROM faultsandrecalls');
 $stmt->execute();
 $faultsandrecalls = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?=template_admin_header('FaultsAndRecalls')?>
+<?=template_admin_header('Faults & Recalls - Admin Panel')?>
 
 <h2>Faults and Recalls</h2>
 

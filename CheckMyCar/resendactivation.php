@@ -1,23 +1,28 @@
 <?php
 include 'main.php';
-// Output message
+
+// The returned message.
 $msg = '';
-// Now we check if the email from the resend activation form was submitted, isset() will check if the email exists.
+
+// Check if the email from the resend activation form was submitted, isset() will check if the email exists.
 if (isset($_POST['email'])) {
+
     // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
     $stmt = $pdo->prepare('SELECT * FROM accounts WHERE email = ? AND activation_code != "" AND activation_code != "activated"');
     $stmt->execute([ $_POST['email'] ]);
     $account = $stmt->fetch(PDO::FETCH_ASSOC);
-    // If the account exists with the email
+
+    // Check there is an email matched to an account. Regardless of the outcome, the $msg variable will displayed on the webpage and an
+	// activation email will be sent if there is a matching email within the database.
     if ($account) {
-        // Account exist, the $msg variable will be used to show the output message (on the HTML form)
         send_activation_email($_POST['email'], $account['activation_code']);
-        $msg = 'Activaton link has been sent to your email!';
+        $msg = 'The activaton link has been sent to your email!';
     } else {
-        $msg = 'We do not have an account with that email!';
+        $msg = 'Sorry, we do not have an account with that email!';
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>

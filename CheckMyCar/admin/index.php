@@ -1,11 +1,12 @@
 <?php
+// Include the root "main.php" file and prepare SQL statements.
 include 'main.php';
 $stmt = $pdo->prepare('SELECT * FROM accounts');
 $stmt->execute();
 $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?=template_admin_header('Accounts')?>
+<?=template_admin_header('Accounts - Admin Panel')?>
 
 <h2>Accounts</h2>
 

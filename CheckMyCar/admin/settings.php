@@ -1,13 +1,17 @@
 <?php
+// Include the root "main.php" file and check if user is logged-in...
 include 'main.php';
+
 // Read the configuration file
 $config_file = file_get_contents('../config.php');
 preg_match_all('/define\(\'(.*?)\', ?(.*?)\)/', $config_file, $matches);
+
 // Format key function
 function format_key($key) {
     $key = str_replace(['_', 'db '], [' ', 'Database '], strtolower($key));
     return ucwords($key);
 }
+
 // Format variable to HTML function
 function format_var_html($key, $value) {
     $html = '';
@@ -23,8 +27,9 @@ function format_var_html($key, $value) {
     $html .= '<input type="' . $type . '" name="' . $key . '" id="' . $key . '" value="' . $value . '" placeholder="' . format_key($key) . '"' . $checked . '>';
     return $html;
 }
+
+// Update the configuration file with the new keys and values
 if (!empty($_POST)) {
-    // Update the configuration file with the new keys and values
     foreach ($_POST as $k => $v) {
         $v = in_array(strtolower($v), ['true', 'false']) ? strtolower($v) : '\'' . $v . '\'';
         $config_file = preg_replace('/define\(\'' . $k . '\'\, ?(.*?)\)/s', 'define(\'' . $k . '\',' . $v . ')', $config_file);
@@ -35,7 +40,7 @@ if (!empty($_POST)) {
 }
 ?>
 
-<?=template_admin_header('Settings')?>
+<?=template_admin_header('Settings - Admin Panel')?>
 
 <h2>Settings</h2>
 

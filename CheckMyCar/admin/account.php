@@ -1,4 +1,5 @@
 <?php
+// Include the root "main.php" file and prepare SQL statements.
 include 'main.php';
 
 // Default input account values
@@ -13,6 +14,7 @@ $account = array(
     'model' => ''
 );
 
+// Array for enum values for db (anything added here will need to be reiterated in the table column entry)
 $roles = array('Member', 'Admin');
 
 if (isset($_GET['id'])) {

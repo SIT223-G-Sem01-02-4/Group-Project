@@ -17,6 +17,9 @@ include 'main.php'; // Include the main.php file to check for current sessions.
             <img class="logo" src="images/logo.svg" onclick="location.href='./home.php';" style="cursor: pointer;" />
                 <div class="links">
                     <a href="home.php"><i class="fas fa-home"></i> Home</a>
+                    <?php if ($_SESSION['role'] == 'Admin'): ?>
+					    <a href="admin/index.php" target="_blank"><i class="fas fa-user-cog"></i> Admin</a>
+					<?php endif; ?>
                     <a href="about-us.php"><i class="fas fa-users"></i> About Us</a>
                     <a href="contact-us.php"><i class="fas fa-envelope"></i> Contact Us</a>
                     <a href="check-my-car.php"><i class="fas fa-car"></i> CheckMyCar</a>
@@ -35,7 +38,6 @@ include 'main.php'; // Include the main.php file to check for current sessions.
             </nav>
         </header>
         <main>    
-                    
             <section class="aboutus_page">
                 <h1 class="hero_font">About Us</h1>
                 <div class="aboutus_content">

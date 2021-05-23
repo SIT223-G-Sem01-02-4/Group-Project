@@ -46,16 +46,16 @@ if($_POST) {
     }
       
     if($concerned_department == "recalls") {
-        $recipient = "recalls@domain.com";
+        $recipient = "sit223checkyourcar@gmail.com";
     }
     else if($concerned_department == "manufacturer faults") {
-        $recipient = "manufacturer.faults@domain.com";
+        $recipient = "sit223checkyourcar@gmail.com";
     }
     else if($concerned_department == "technical support") {
-        $recipient = "tech.support@domain.com";
+        $recipient = "sit223checkyourcar@gmail.com";
     }
     else {
-        $recipient = "contact@domain.com";
+        $recipient = "sit223checkyourcar@gmail.com";
     }
       
     $email_body .= "</div>";
@@ -71,6 +71,6 @@ if($_POST) {
     }
       
 } else {
-    echo '<p>Something went wrong</p>';
+    echo '<p>Something went wrong! =(</p>';
 }
 ?>

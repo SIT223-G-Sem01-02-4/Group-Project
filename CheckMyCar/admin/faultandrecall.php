@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<?=template_admin_header($page . ' Fault/Recall')?>
+<?=template_admin_header($page . ' Fault/Recall - Admin Panel')?>
 
 <h2><?=$page?> Fault or Recall</h2>
 
