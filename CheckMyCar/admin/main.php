@@ -4,8 +4,11 @@ include_once '../config.php';
 include_once '../main.php';
 check_loggedin($pdo, '../login.php');
 $stmt = $pdo->prepare('SELECT * FROM accounts WHERE id = ?');
+$frstmt = $pdo->prepare('SELECT * FROM faultsandrecalls WHERE id = ?');
 $stmt->execute([ $_SESSION['id'] ]);
 $account = $stmt->fetch(PDO::FETCH_ASSOC);
+$faultrecall = $frstmt->fetch(PDO::FETCH_ASSOC);
+
 // Check if user is an admin...
 if ($account['role'] != 'Admin') {
     exit('You do not have permission to access this page!');
@@ -32,6 +35,7 @@ echo <<<EOT
         </header>
         <aside class="responsive-width-100 responsive-hidden">
             <a href="index.php"><i class="fas fa-users"></i>Accounts</a>
+            <a href="faultsandrecalls.php"><i class="fas fa-car"></i>Faults & Recalls</a>
             <a href="emailtemplate.php"><i class="fas fa-envelope"></i>Email Template</a>
             <a href="settings.php"><i class="fas fa-tools"></i>Settings</a>
             <a href="../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
