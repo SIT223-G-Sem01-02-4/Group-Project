@@ -1,7 +1,18 @@
 <?php
 include 'main.php';
+//Brute Fore Protection - Each failed login attempt triggers a counter, once the counter = 100 the user cant login for 24 hours.
+$login_attempts = loginAttempts($pdo, FALSE);
+if ($login_attempts && $login_attempts['attempts_left'] <= 0) {
+	exit('You cannot login right now please try again later!');
+}
+
+//CSRF Protection - when the user logs in, each login will require a token that will be checked with PHP.
+if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['token']) {
+	exit('Incorrect token provided!');
+}
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if (!isset($_POST['username'], $_POST['password'])) {
+	$login_attempts = loginAttempts($pdo);
 	// Could not get the data that should have been sent.
 	exit('Please fill both the username and password field!');
 }
@@ -19,6 +30,11 @@ if ($account) {
 		if (account_activation && $account['activation_code'] != 'activated') {
 			// User has not activated their account, output the message
 			echo 'Please activate your account to login, click <a href="resendactivation.php">here</a> to resend the activation email!';
+		} 	// Crosscheck users IP address with whats recorded on the system
+		else if ($_SERVER['REMOTE_ADDR'] != $account['ip']) {
+			// Two-factor authentication required
+			$_SESSION['2FA'] = uniqid();
+			echo '2FA: twofactor.php?id=' . $account['id'] . '&email=' . $account['email'] . '&code=' . $_SESSION['2FA'];
 		} else {
 			// Verification success! User has loggedin!
 			// Create sessions so we know the user is logged in, they basically act like cookies but remember the data on the server.
@@ -42,10 +58,12 @@ if ($account) {
 		}
 	} else {
 		// Incorrect password
-		echo 'Incorrect username and/or password!';
+		$login_attempts = loginAttempts($pdo, TRUE);
+		echo 'Incorrect username and/or password, you have ' . $login_attempts['attempts_left'] . ' attempts remaining!';
 	}
 } else {
 	// Incorrect username
-	echo 'Incorrect username and/or password!';
+	$login_attempts = loginAttempts($pdo, TRUE);
+	echo 'Incorrect username and/or password, you have ' . $login_attempts['attempts_left'] . ' attempts remaining!';
 }
 ?>

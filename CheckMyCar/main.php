@@ -15,6 +15,7 @@ try {
 	exit('Failed to connect to database, please try again later.');
 }
 
+///////////////////////////////// F U N C T I O N S /////////////////////////////////
 // A function to check if the user is logged in and if there is a valid session cookie.
 function check_loggedin($pdo, $redirect_file = 'login.php') {
 	// Check for the 'Remember me cookie' variable and 'Logged-in session' variable
@@ -58,5 +59,28 @@ function send_activation_email($email, $code) {
 	$activate_link = activation_link . '?email=' . $email . '&code=' . $code;
 	$email_template = str_replace('%link%', $activate_link, file_get_contents('../admin/emailtemplates/activation-email-template.html'));
 	mail($email, $subject, $email_template, $headers);
+}
+
+// Bruteforce Protection - This limits the users to X amount of login attempts per IP address
+function loginAttempts($pdo, $update = TRUE) {
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$now = date('Y-m-d H:i:s');
+	if ($update) {
+		$stmt = $pdo->prepare('INSERT INTO login_attempts (ip_address, `date`) VALUES (?,?) ON DUPLICATE KEY UPDATE attempts_left = attempts_left - 1, `date` = VALUES(`date`)');
+		$stmt->execute([$ip,$now]);
+	}
+	$stmt = $pdo->prepare('SELECT * FROM login_attempts WHERE ip_address = ?');
+	$stmt->execute([$ip]);
+	$login_attempts = $stmt->fetch(PDO::FETCH_ASSOC);
+	if ($login_attempts) {
+		// The user can try to login after 1 day
+		$expire = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($login_attempts['date'])));
+		if ($now > $expire) {
+			$stmt = $pdo->prepare('DELETE FROM login_attempts WHERE ip_address = ?');
+			$stmt->execute([$ip]);
+			$login_attempts = array();
+		}
+	}
+	return $login_attempts;
 }
 ?>

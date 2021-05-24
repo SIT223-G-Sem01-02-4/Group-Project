@@ -36,11 +36,12 @@ if ($account) {
 	echo 'Username and/or email exists!';
 } else {
 	// Username doesn't exist, insert new account
-	$stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)');
+	$stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code, ip) VALUES (?, ?, ?, ?, ?)');
 	// We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	$uniqid = account_activation ? uniqid() : 'activated';
-	$stmt->execute([ $_POST['username'], $password, $_POST['email'], $uniqid ]);
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$stmt->execute([ $_POST['username'], $password, $_POST['email'], $uniqid, $ip ]);
 	if (account_activation) {
 		// Account activation required, send the user the activation email with the "send_activation_email" function from the "main.php" file
 		send_activation_email($_POST['email'], $uniqid);

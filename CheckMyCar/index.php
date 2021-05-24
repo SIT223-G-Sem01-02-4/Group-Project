@@ -1,7 +1,7 @@
 <?php
 include 'main.php';
-// If the user is logged-in redirect them to the home page
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,5 +37,18 @@ include 'main.php';
 					<?php endif; ?>
 			</div>
 		</nav>
+		<main>    
+            <div class="searchfunction">
+                <h1> Check for Safety Issues & Recalls!</h1>
+                <form action="search.php" method="POST">
+					<label for="make"><i class="fas fa-car"></i></label>
+					<input type="text" name="search_make" id="make" placeholder="Search make" required>
+					<label for="model"><i class="fas fa-car"></i></label>
+					<input type="text" name="search_model" id="model" placeholder="Seach model" required>
+                    <div class="msg"></div>
+                    <input type="submit" value="Search!" name="search_submit"></input>
+                </form>
+            </div>
+        </main>
 	</body>
 </html>

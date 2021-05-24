@@ -22,7 +22,11 @@ if (isset($_COOKIE['rememberme']) && !empty($_COOKIE['rememberme'])) {
 		exit;
 	}
 }
+
+//CSRF Protection - when the user logs in, each login will require a token that will be checked with PHP
+$_SESSION['token'] = md5(uniqid(rand(), true));
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -60,6 +64,8 @@ if (isset($_COOKIE['rememberme']) && !empty($_COOKIE['rememberme'])) {
 				<label id="rememberme">
 					<input type="checkbox" name="rememberme">Remember me
 				</label>
+				<a href="forgotpassword.php">Forgot Your Password?</a>
+				<input type="hidden" name="token" value="<?=$_SESSION['token']?>">
 				<div class="msg"></div>
 				<input type="submit" value="Login">
 			</form>
@@ -73,6 +79,8 @@ if (isset($_COOKIE['rememberme']) && !empty($_COOKIE['rememberme'])) {
 			xhr.onload = function () {
 				if (this.responseText.toLowerCase().indexOf("success") !== -1) {
 					window.location.href = "index.php";
+				} else if (this.responseText.indexOf("2FA") !== -1) {
+    				window.location.href = this.responseText.replace("2FA: ", "");
 				} else {
 					document.querySelector(".msg").innerHTML = this.responseText;
 				}

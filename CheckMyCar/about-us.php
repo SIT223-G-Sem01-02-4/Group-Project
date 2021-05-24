@@ -38,6 +38,18 @@ include 'main.php';
 		</nav>
         <main>    
             <div class="aboutus">
+                <h1>About Us!</h1>
+                <p class="aboutus_pclass">
+                    For project A, our group is to take on the imaginary role of beginning a start-up 
+                    company called ‘CheckYourCar’. The ‘CheckYourCar’ platform intends to connect its 
+                    end users with information regarding any know issues and/or problems identified 
+                    with their cars. (i.e. Takata airbag recalls or other known manufacture faults.) 
+                    The team consits of 5 members of whom take upon different roles and positions.<br></p> 
+                    
+                    <h2><br>Ajay Sutton<br>Backend / Security Analyst<br></h2>
+                    <h2><br>Luke Collins<br>Full Stack Development<br><h2>
+                    <h2><br>Mohammed Uddin<br>Database / Securit Analyst<br></h2>
+                    <h2><br>Rhea Sutton <br>Scrum Master / Front End Development<br></h2>
             </div>
         </main>
 	</body>
