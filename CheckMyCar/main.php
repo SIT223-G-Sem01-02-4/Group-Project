@@ -61,6 +61,14 @@ function send_activation_email($email, $code) {
 	mail($email, $subject, $email_template, $headers);
 }
 
+// A function to send the email to registered users when a new fault/recall is added that matches there vehicle.
+function send_newfaultorrecallmatch_email($email, $description) {
+	$subject = 'Your at risk - A recently discovered fault/recall impacts you!';
+	$headers = 'From: ' . mail_from . "\r\n" . 'Reply-To: ' . mail_from . "\r\n" . 'Return-Path: ' . mail_from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+	$email_template = str_replace('%description%', $description, file_get_contents('../admin/emailtemplates/matchedrecallfault-email-template.html'));
+	mail($email, $subject, $email_template, $headers);
+}
+
 // Bruteforce Protection - This limits the users to X amount of login attempts per IP address
 function loginAttempts($pdo, $update = TRUE) {
 	$ip = $_SERVER['REMOTE_ADDR'];
