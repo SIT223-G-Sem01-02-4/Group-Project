@@ -40,11 +40,22 @@ if (isset($_GET['id'])) {
     if (isset($_POST['submit'])) {
         $stmt = $pdo->prepare('INSERT IGNORE INTO faultsandrecalls (type,make,model,description) VALUES (?,?,?,?)');
         $stmt->execute([ $_POST['type'], $_POST['make'], $_POST['model'], $_POST['description']]);
-        header('Location: faultsandrecalls.php');
-        exit;
+        //Check for users that have matching personal vehicles
+        $checkmake = $_POST['search_make'];
+        $checkmodel = $_POST['search_model'];
+ 
+        $sql = "SELECT * FROM accounts WHERE make = :make AND model = :model";
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':make',$checkmake,PDO::PARAM_STR);
+        $stmt->bindParam(':model',$checkmodel,PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $data = $stmt->fetchAll();
+        ?>
     }
 }
-?>
+
 
 <?=template_admin_header($page . ' Fault/Recall - Admin Panel')?>
 
