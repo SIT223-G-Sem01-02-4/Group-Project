@@ -26,7 +26,7 @@ if (isset($_GET['email'], $_GET['code']) && !empty($_GET['code'])) {
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
-		<title>Activate Account</title>
+		<title>Activate Account - CheckYourCar</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="loggedin">
