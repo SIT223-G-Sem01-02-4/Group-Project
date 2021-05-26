@@ -53,7 +53,7 @@ if($_POST) {
 		</nav>
 		<main>    
             <div class="searchresults">
-                <h1>Search Results</h1>
+                <h1>Search Results for '<?=$_POST['search_make']?>' '<?=$_POST['search_model']?>'</h1>
                 <form action="index.php" method="">
                 <div class="table">
                     <table>
@@ -69,7 +69,7 @@ if($_POST) {
                         <tbody>
                             <?php if (empty($data)): ?>
                             <tr>
-                                <td colspan="8" style="text-align:center;">There are currently no faults or recalls for this vehicle!</td>
+                                <td colspan="8" style="text-align:center;">There are currently no faults or recalls published for this vehicle!</td>
                             </tr>
                             <?php else: ?>
                             <?php foreach ($data as $faultrecall): ?>
