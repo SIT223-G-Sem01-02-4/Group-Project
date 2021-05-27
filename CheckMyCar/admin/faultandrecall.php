@@ -11,7 +11,7 @@ $faultrecall = array(
 
 // Array for enum values for db (anything added here will need to be reiterated in the table column entry)
 $types = array('Fault','Recall');
-$makes = array('Audi','BMW','Ferrari','Ford','Holden','Holden','Lexus','Mazda','Tesla','Toyota','Volkswagon');
+$makes = array('Audi','BMW','Ferrari','Ford','Holden','Hyundai','Lexus','Mazda','Tesla','Toyota','Volkswagon');
 
 if (isset($_GET['id'])) {
     // Get the fault or recall from the database
@@ -60,7 +60,6 @@ if (isset($_GET['id'])) {
     }
 }
 ?>
-
 
 <?=template_admin_header($page . ' Fault/Recall - Admin Panel')?>
 

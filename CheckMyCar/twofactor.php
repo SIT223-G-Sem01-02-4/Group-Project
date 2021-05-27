@@ -18,7 +18,7 @@ if (isset($_GET['id'], $_GET['email'], $_GET['code'], $_SESSION['2FA']) && $_SES
                 $ip = $_SERVER['REMOTE_ADDR'];
                 $stmt = $pdo->prepare('UPDATE accounts SET ip = ? WHERE id = ?');
                 $stmt->execute([ $ip, $_GET['id'] ]);
-                $msg = 'Access code accepted! You can now <a href="index.php">login</a>!';
+                $msg = 'Access code accepted! You can now <a href="login.php">login</a>!';
             } else {
                 $msg = 'Incorrect code provided!';
             }

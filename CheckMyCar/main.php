@@ -57,7 +57,7 @@ function send_activation_email($email, $code) {
 	$subject = 'Account Activation Required';
 	$headers = 'From: ' . mail_from . "\r\n" . 'Reply-To: ' . mail_from . "\r\n" . 'Return-Path: ' . mail_from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 	$activate_link = activation_link . '?email=' . $email . '&code=' . $code;
-	$email_template = str_replace('%link%', $activate_link, file_get_contents('../admin/emailtemplates/activation-email-template.html'));
+	$email_template = str_replace('%link%', $activate_link, file_get_contents('activation-email-template.html'));
 	mail($email, $subject, $email_template, $headers);
 }
 
